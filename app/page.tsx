@@ -1,6 +1,5 @@
 // clerk imports
 import { auth } from "@clerk/nextjs"
-import { dark } from "@clerk/themes"
 
 //next js imports
 import { redirect } from "next/navigation";
