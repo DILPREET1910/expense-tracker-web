@@ -1,5 +1,5 @@
 // project files imports
-import { CheckIfExists, InsertDefaultCategories } from "@/app/lib/categories";
+import { CheckIfExists, GetCategories, InsertDefaultCategories } from "@/app/lib/categories";
 
 // clerk imports
 import { auth } from "@clerk/nextjs";
@@ -13,10 +13,19 @@ export default async function Categories() {
 
   // if user not present add default categories
   if(!existsCheck){
-    InsertDefaultCategories(userId!);
+    await InsertDefaultCategories(userId!);
   }  
 
+  // get categories
+  const categories = await GetCategories(userId!);
+
   return(
-    <div>Categories</div>
+    <div>
+      {
+        categories.map((element:string)=> {
+          return(<h1 key={element}>{element}</h1>);
+        })
+      }
+    </div>
   );
 }
