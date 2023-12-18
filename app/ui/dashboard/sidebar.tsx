@@ -17,6 +17,7 @@ export default function Sidebar(){
     {key:1, name:"Dashboard",href:"/dashboard"},
     {key:2, name:"Add Entries",href:"/dashboard/add"},
     {key:3, name:"Data Entries",href:"/dashboard/entries"},
+    {key:4, name:"Categories",href:"/dashboard/categories"},
   ];
 
   const pathname = usePathname();
@@ -28,7 +29,7 @@ export default function Sidebar(){
           return (
             <Link key={element.key} href={element.href}
               className={clsx( "p-2 rounded-lg hover:bg-sky-50" ,
-                {"bg-sky-200":pathname==element.href},
+                {"bg-sky-200 hover:bg-sky-200":pathname==element.href},
               )}
             >{element.name}</Link>
           );
