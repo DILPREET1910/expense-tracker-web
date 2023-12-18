@@ -11,10 +11,11 @@ export default async function Categories() {
   const existsCheck = await CheckIfExists(userId!);
 
 
+  // if user not present add default categories
   if(!existsCheck){
-    // if user not present add default categories
     InsertDefaultCategories(userId!);
   }  
+
   return(
     <div>Categories</div>
   );
