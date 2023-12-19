@@ -39,3 +39,14 @@ VALUES (${id},${category})`;
 
   return false;
 }
+
+export async function DeleteCategory(id:string){
+  try {
+    await sql`DELETE FROM categories WHERE id=${id}`; 
+    return true;
+  } catch (error) {
+    console.log(`Error: while deleting category : ${error}`) ;
+  }
+
+  return false;
+}
