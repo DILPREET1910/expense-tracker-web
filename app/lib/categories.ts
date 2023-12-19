@@ -27,3 +27,15 @@ export async function GetCategories(id:string){
 
   return [];
 }
+
+export async function AddCategory(id:string, category:string){
+  try {
+    await sql`INSERT INTO categories (user_id,name)
+VALUES (${id},${category})`;
+    return true; 
+  } catch (error) {
+    console.log(`Error: while adding category : ${error}`) ;
+  }
+
+  return false;
+}
