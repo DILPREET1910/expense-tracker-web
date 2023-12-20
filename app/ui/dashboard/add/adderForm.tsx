@@ -7,18 +7,38 @@ import React, { useState } from "react";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 
+//react imports
+import { useRef } from "react";
 
 // vercel imports
 import { QueryResultRow } from "@vercel/postgres";
 
-export default function AdderForm({categories}:{categories:QueryResultRow[]}){
+export default function AdderForm(
+  {
+    categories,handleSubmit
+  }:{
+    categories:QueryResultRow[],
+    handleSubmit:(formData:FormData) => void
+  }
+){
+  // date
   const [date,setDate] = useState(new Date());
 
+  const ref = useRef<HTMLFormElement>(null);
+
   return(
-    <form>
+    <form action={
+      (formData)=>{
+        handleSubmit(formData);
+        ref.current?.reset();
+      }
+    }
+      ref={ref}
+    >
       <div className="flex flex-row">
-        <DatePicker selected={date} onChange={(newDate)=>setDate(newDate!)}/>
+        <DatePicker name="datePicker" selected={date} onChange={(newDate)=>setDate(newDate!)}/>
         <select 
+          name="selectCategory"
           className="ml-auto bg-white" 
           required
           defaultValue={""}
