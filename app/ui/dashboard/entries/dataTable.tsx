@@ -23,7 +23,7 @@ export default function DataTable({entries}:{entries:QueryResultRow[]}){
                 return(
                   <tr key={entry.id}>
                     <td className="border border-gray-500 pl-1">{entry.date}</td>
-                    <td className="border border-gray-500 pl-1">{entry.category_id}</td>
+                    <td className="border border-gray-500 pl-1">{entry.category_name}</td>
                     <td className="border border-gray-500 pl-1">{entry.description}</td>
                     <td className="border border-gray-500 pl-1">{entry.amount}</td>
                   </tr>
