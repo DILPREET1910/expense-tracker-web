@@ -26,3 +26,15 @@ VALUES (${user_id},${category_id},${date},${description},${amount})`;
 
   return false;
 }
+
+export async function GetEntries({user_id}:{user_id:string}){
+  try {
+    const result = await sql`SELECT * FROM entries WHERE user_id=${user_id}`; 
+    const rows = result.rows;
+    return rows;
+  } catch (erorr) {
+    console.log(`Error: while getting entries: ${erorr}`); 
+  }
+
+  return null;
+}

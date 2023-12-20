@@ -6,9 +6,6 @@ import AdderForm from "@/app/ui/dashboard/add/adderForm";
 // clerk imports
 import { auth } from "@clerk/nextjs";
 
-// vercel imports
-import { sql } from "@vercel/postgres";
-
 export default async function Add() {
   // get user id
   const {userId} = auth();

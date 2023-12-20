@@ -50,3 +50,14 @@ export async function DeleteCategory(id:string){
 
   return false;
 }
+
+export async function GetCategoryName({id}:{id:string}){
+  try {
+    const result = await sql`SELECT * FROM categories WHERE id=${id}`; 
+    return result.rows;
+  } catch (error) {
+    console.log(`Error: while getting category name: ${error}`) ;
+  }
+
+  return null;
+}
