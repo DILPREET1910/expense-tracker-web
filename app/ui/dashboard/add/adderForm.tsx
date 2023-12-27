@@ -3,7 +3,7 @@
 // react imports
 import React, { useState } from "react";
 
-// react datepicker
+// react datepicker imports
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 

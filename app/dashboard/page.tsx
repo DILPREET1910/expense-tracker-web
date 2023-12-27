@@ -1,5 +1,8 @@
+// project files imports
+import DashboardForm from "../ui/dashboard/dashboardForm";
+
 export default function Dashboard(){
   return(
-    <h1>Dashboard</h1>
+    <DashboardForm/>
   );
 }
