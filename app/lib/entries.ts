@@ -1,5 +1,5 @@
 // vercel imports
-import { sql } from "@vercel/postgres";
+import { QueryResultRow, sql } from "@vercel/postgres";
 import { GetCategoryName } from "./categories";
 
 export async function AddEntry(
@@ -35,6 +35,35 @@ export async function GetEntries({user_id}:{user_id:string}){
     return result.rows;
   } catch (erorr) {
     console.log(`Error: while getting entries: ${erorr}`); 
+  }
+
+  return [];
+}
+
+export async function GetDashboardEntries(
+  {
+    user_id,
+    fromDate,
+    toDate
+  }:{
+    user_id:string,
+    fromDate:Date,
+    toDate:Date
+  }
+){
+  try {
+    const result = await GetEntries({user_id:user_id}); 
+    let sortedResults: QueryResultRow[] = [];
+    result.map(
+      (element) => {
+        if(Date.parse( element.date ).valueOf()>=fromDate.valueOf() && Date.parse( element.date ).valueOf()<=toDate.valueOf()){
+          sortedResults.push(element);
+        }
+      }
+    )
+    return sortedResults;
+  } catch (error) {
+    console.log(`Error: while getting dashboard entries: ${error}`); 
   }
 
   return [];
