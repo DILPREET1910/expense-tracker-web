@@ -7,7 +7,10 @@ import React, { useState } from "react";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 
-export default function DashboardForm(){
+// project files imports
+import { global } from "@/global";
+
+export default function DashboardForm({revalidate}:{revalidate:any}){
   const date = new Date();
 
   // react hooks
@@ -23,7 +26,13 @@ export default function DashboardForm(){
             name="fromDate" 
             dateFormat="dd-MMM-yyyy" 
             selected={fromDate} 
-            onChange={(newDate)=>{setFromDate(newDate!)}}
+            onChange={
+              (newDate) => {
+                setFromDate(newDate!)
+                global.fromDate = newDate!;
+                revalidate();
+              }
+            }
             className="w-28"
           />
         </div>
@@ -34,7 +43,13 @@ export default function DashboardForm(){
             name="toDate"
             dateFormat="dd-MMM-yyyy" 
             selected={toDate} 
-            onChange={(newDate)=>{setToDate(newDate!)}}
+            onChange={
+              (newDate) => {
+                setToDate(newDate!)
+                global.toDate = newDate!;
+                revalidate();
+              }
+            }
             className="w-28"
           />
         </div>
