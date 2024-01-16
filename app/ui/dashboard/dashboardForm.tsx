@@ -7,15 +7,10 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-// project files imports
-import { global } from "@/global";
-
 export default function DashboardForm({
-  revalidate,
-  categoricalData,
+  GetCategoricalData,
 }: {
-  revalidate: any;
-  categoricalData: Map<string, number>;
+  GetCategoricalData: any;
 }) {
   const date = new Date();
 
@@ -27,47 +22,50 @@ export default function DashboardForm({
     new Date(date.getFullYear(), date.getMonth() + 1, 0),
   );
 
-  // manage categorical data
-  let total = 0;
-  let categoricalArray: any = [];
-  categoricalData.forEach((value: number, key: string) => {
-    total += value;
-    categoricalArray.push({ key, value });
-  });
-
   return (
     <div className="border-4 border-gray-900 rounded-lg p-12">
-      <div className="flex flex-row">
-        <div className="flex flex-row">
-          <p>from:</p>
-          <DatePicker
-            name="fromDate"
-            dateFormat="dd-MMM-yyyy"
-            selected={fromDate}
-            onChange={(newDate) => {
-              setFromDate(newDate!);
-              global.fromDate = newDate!;
-              revalidate();
-            }}
-            className="w-28"
-          />
-        </div>
+      <form
+        action={(formData) => {
+          GetCategoricalData(formData);
+        }}
+      >
+        <div className="flex justify-between">
+          <div className="flex">
+            <p>from:</p>
+            <DatePicker
+              name="fromDate"
+              dateFormat="dd-MMM-yyyy"
+              selected={fromDate}
+              onChange={(newDate) => {
+                setFromDate(newDate!);
+              }}
+              className="w-28"
+            />
+          </div>
 
-        <div className="ml-auto flex flex-row">
-          <p>to:</p>
-          <DatePicker
-            name="toDate"
-            dateFormat="dd-MMM-yyyy"
-            selected={toDate}
-            onChange={(newDate) => {
-              setToDate(newDate!);
-              global.toDate = newDate!;
-              revalidate();
-            }}
-            className="w-28"
-          />
+          <div className="flex">
+            <p>to:</p>
+            <DatePicker
+              name="toDate"
+              dateFormat="dd-MMM-yyyy"
+              selected={toDate}
+              onChange={(newDate) => {
+                setToDate(newDate!);
+              }}
+              className="w-28"
+            />
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              className="bg-gray-700 text-white shadow hover:bg-gray-900 rounded-lg w-full p-1"
+            >
+              filter
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
 
       <div className="mt-6">
         <div className="border-4 border-gray-900 rounded-lg">
@@ -81,25 +79,9 @@ export default function DashboardForm({
             </thead>
 
             <tbody>
-              {categoricalArray.map((element: any) => {
-                return (
-                  <tr key={element.key}>
-                    <td className="border border-gray-500 p-1">
-                      {element.key}
-                    </td>
-                    <td className="border border-gray-500 p-1 text-right">
-                      {element.value}
-                    </td>
-                    <td className="border border-gray-500 p-1 text-right">
-                      {((element.value / total) * 100).toFixed(2)}%
-                    </td>
-                  </tr>
-                );
-              })}
-
               <tr className="bg-gray-200">
                 <td className="border border-gray-500 p-1">Total</td>
-                <td className="border border-gray-500 p-1 text-right">{total}</td>
+                <td className="border border-gray-500 p-1 text-right"></td>
                 <td className="border border-gray-500 p-1 text-right">100%</td>
               </tr>
             </tbody>

@@ -7,32 +7,20 @@ import { revalidatePath } from "next/cache";
 // project files imports
 import { GetDashboardEntries } from "../lib/entries";
 import DashboardForm from "../ui/dashboard/dashboardForm";
-import { global } from "@/global";
 
 export default async function Dashboard() {
   const { userId } = auth();
 
-  let filteredData = await GetDashboardEntries({
-    user_id: userId!,
-    fromDate: global.fromDate,
-    toDate: global.toDate,
-  });
-
-  // get categorical Data
-  let categoricalData = new Map<string, number>();
-  filteredData.forEach((element) => {
-    const key = element.category_name;
-    const getValue = categoricalData.get(key) || 0;
-
-    categoricalData.set(key, getValue + +element.amount);
-  });
-
-  async function revalidate() {
+  async function GetCategoricalDataEntries(formData: FormData) {
     "use server";
-    revalidatePath("/dashboard");
+    let filteredData = await GetDashboardEntries({
+      user_id: userId!,
+      fromDate: new Date(formData.get("fromDate")!.toString()),
+      toDate: new Date(formData.get("toDate")!.toString()),
+    });
+
+    console.log(filteredData);
   }
 
-  return (
-    <DashboardForm revalidate={revalidate} categoricalData={categoricalData} />
-  );
+  return <DashboardForm GetCategoricalData={GetCategoricalDataEntries} />;
 }
