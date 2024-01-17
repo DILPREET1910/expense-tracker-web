@@ -1,13 +1,17 @@
 "use client";
 
 // react imports
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // react datepicker
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+// next imports
+import { useRouter } from "next/navigation";
+
 export default function DashboardForm() {
+  const router = useRouter();
   const date = new Date();
 
   // react hooks
@@ -17,6 +21,12 @@ export default function DashboardForm() {
   const [toDate, setToDate] = useState(
     new Date(date.getFullYear(), date.getMonth() + 1, 0),
   );
+
+  useEffect(() => {
+    router.push(
+      `/dashboard?from=${fromDate.toLocaleDateString()}&to=${toDate.toLocaleDateString()}`,
+    );
+  }, [fromDate, toDate, router]);
 
   return (
     <div className="flex justify-between">
