@@ -4,8 +4,9 @@ import { auth } from "@clerk/nextjs";
 // react icons imports
 import CopyPublicKey from "@/app/ui/dashboard/profile/copyPublicKey";
 import { RiInformationLine } from "react-icons/ri";
+
+// project imports
 import { GetPublicKey } from "@/app/lib/user";
-import { useId } from "react";
 
 export default async function Profile() {
   const { userId } = auth();
