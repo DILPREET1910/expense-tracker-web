@@ -18,6 +18,7 @@ export default function Sidebar() {
     { key: 2, name: "Add Entries", href: "/dashboard/add" },
     { key: 3, name: "Data Entries", href: "/dashboard/entries" },
     { key: 4, name: "Categories", href: "/dashboard/categories" },
+    { key: 5, name: "Shared with You", href: "/dashboard/shared" },
   ];
 
   const pathname = usePathname();
@@ -42,7 +43,9 @@ export default function Sidebar() {
         <div
           className={clsx(
             "mt-auto flex flex-row items-center p-2 rounded-lg hover:bg-sky-50",
-            { "hover:bg-sky-200 bg-sky-200 ": pathname == "/dashboard/profile" },
+            {
+              "hover:bg-sky-200 bg-sky-200 ": pathname == "/dashboard/profile",
+            },
           )}
         >
           <UserButton afterSignOutUrl="/" />
