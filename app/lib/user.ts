@@ -17,9 +17,10 @@ export async function CheckUserExists(id: string) {
 }
 
 export async function InsertUser(id: string) {
+  const emptyArray: any = [];
   try {
-    await sql`INSERT INTO users (id, first_time, public_key) 
-VALUES(${id},TRUE, ${uuidv4()})`;
+    await sql`INSERT INTO users (id, first_time, public_key, shared_keys) 
+VALUES(${id},TRUE, ${uuidv4()},${emptyArray})`;
     return true;
   } catch (error) {
     console.log(`Error: while inserting user : ${error}`);
