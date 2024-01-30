@@ -10,7 +10,8 @@ export default function SharedWithYou() {
 
   async function handleOnSubmit(formData: FormData) {
     "use server";
-    console.log(formData.get("public_key"));
+    const shared_key = formData.get("public_key")?.toString();
+    await AddSharedKey({ id: userId!, shared_key: shared_key! });
   }
 
   return <AddPublicKeyForm handleOnSubmit={handleOnSubmit} />;
