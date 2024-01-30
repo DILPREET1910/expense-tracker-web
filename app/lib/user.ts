@@ -67,3 +67,20 @@ export async function GetPublicKey({ id }: { id: string }) {
 
   return "";
 }
+
+export async function AddSharedKey({
+  id,
+  shared_key,
+}: {
+  id: string;
+  shared_key: string;
+}) {
+  try {
+    await sql`UPDATE users SET shared_keys = array_append(shared_keys,${shared_key}) WHERE id=${id}`;
+    return true;
+  } catch (error) {
+    console.log(`Error: while adding shared key: ${error}`);
+  }
+
+  return false;
+}
