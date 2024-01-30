@@ -84,3 +84,15 @@ export async function AddSharedKey({
 
   return false;
 }
+
+export async function GetSharedKeys({ id }: { id: string }) {
+  try {
+    const result = await sql`SELECT * FROM users WHERE id=${id}`;
+    const row = result.rows[0];
+    const shared_keys = row.shared_keys;
+    return shared_keys;
+  } catch (error) {
+    console.log(`Error: while getting shared keys: ${error}`);
+  }
+  return [];
+}

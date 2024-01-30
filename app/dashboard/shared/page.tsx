@@ -2,7 +2,7 @@
 import { auth } from "@clerk/nextjs";
 
 // lib imports
-import { AddSharedKey } from "@/app/lib/user";
+import { AddSharedKey, GetSharedKeys } from "@/app/lib/user";
 import AddPublicKeyForm from "@/app/ui/dashboard/shared/addPublicKeyForm";
 
 export default function SharedWithYou() {
@@ -13,6 +13,12 @@ export default function SharedWithYou() {
     const shared_key = formData.get("public_key")?.toString();
     await AddSharedKey({ id: userId!, shared_key: shared_key! });
   }
+
+  async function getSharedKeys() {
+    console.log(await GetSharedKeys({ id: userId! }));
+  }
+
+  getSharedKeys();
 
   return <AddPublicKeyForm handleOnSubmit={handleOnSubmit} />;
 }
