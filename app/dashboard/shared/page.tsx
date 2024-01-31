@@ -1,11 +1,12 @@
 // clerk imports
-import { auth } from "@clerk/nextjs";
+import { auth, clerkClient } from "@clerk/nextjs";
 
 // lib imports
 import { AddSharedKey, GetSharedKeys } from "@/app/lib/user";
 import AddPublicKeyForm from "@/app/ui/dashboard/shared/addPublicKeyForm";
+import SharedUserProfile from "@/app/ui/dashboard/shared/sharedUserProfile";
 
-export default function SharedWithYou() {
+export default async function SharedWithYou() {
   const { userId } = auth();
 
   async function handleOnSubmit(formData: FormData) {
@@ -14,11 +15,26 @@ export default function SharedWithYou() {
     await AddSharedKey({ id: userId!, shared_key: shared_key! });
   }
 
-  async function getSharedKeys() {
-    console.log(await GetSharedKeys({ id: userId! }));
-  }
+  const shared_keys = await GetSharedKeys({ id: userId! });
 
-  getSharedKeys();
+  const user = await clerkClient.users.getUser(userId!);
+  console.log(user.imageUrl);
+  console.log(user.firstName);
 
-  return <AddPublicKeyForm handleOnSubmit={handleOnSubmit} />;
+  return (
+    <div>
+      <AddPublicKeyForm handleOnSubmit={handleOnSubmit} />
+      <p className="mb-8"></p>
+      <SharedUserProfile
+        networkImage={user.imageUrl}
+        firstName={user.firstName || "Anonymous"}
+        lastName={user.lastName || ""}
+      />
+      <SharedUserProfile
+        networkImage={user.imageUrl}
+        firstName={user.firstName || "Anonymous"}
+        lastName={user.lastName || ""}
+      />
+    </div>
+  );
 }
