@@ -28,6 +28,16 @@ export default async function SharedWithYou() {
     <div>
       <AddPublicKeyForm handleOnSubmit={handleOnSubmit} />
       <p className="mb-8"></p>
+      {shared_user_profile_data.map((user: any) => {
+        return (
+          <SharedUserProfile
+            key={user[0]}
+            networkImage={user[0]}
+            firstName={user[1]}
+            lastName={user[2]}
+          />
+        );
+      })}
     </div>
   );
 }
