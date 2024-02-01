@@ -139,3 +139,20 @@ export async function GetSharedUserProfileData({
 
   return shared_user_profile_data;
 }
+
+export async function CheckValidSharedSlug({
+  id,
+  public_key,
+}: {
+  id: string;
+  public_key: string;
+}) {
+  try {
+    const shared_keys = await GetSharedKeys({ id: id });
+    return shared_keys.includes(public_key);
+  } catch (error) {
+    console.log(`Error: while checking valid shared page slug: ${error}`);
+  }
+
+  return false;
+}
