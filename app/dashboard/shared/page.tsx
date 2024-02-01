@@ -35,6 +35,7 @@ export default async function SharedWithYou() {
             networkImage={user[0]}
             firstName={user[1]}
             lastName={user[2]}
+            public_key={user[3]}
           />
         );
       })}
