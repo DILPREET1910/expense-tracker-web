@@ -129,6 +129,7 @@ export async function GetSharedUserProfileData({
           user.imageUrl,
           user.firstName,
           user.lastName,
+          public_key,
         ]);
       } catch (error) {
         console.log(`Error: while getting shared user profile data: ${error}`);

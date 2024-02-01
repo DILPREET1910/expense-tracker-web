@@ -31,7 +31,7 @@ export default async function SharedWithYou() {
       {shared_user_profile_data.map((user: any) => {
         return (
           <SharedUserProfile
-            key={user[0]}
+            key={user[3]}
             networkImage={user[0]}
             firstName={user[1]}
             lastName={user[2]}
