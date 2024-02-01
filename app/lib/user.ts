@@ -1,3 +1,6 @@
+// clerk imports
+import { clerkClient } from "@clerk/nextjs";
+
 // vercel imports
 import { sql } from "@vercel/postgres";
 
@@ -95,4 +98,43 @@ export async function GetSharedKeys({ id }: { id: string }) {
     console.log(`Error: while getting shared keys: ${error}`);
   }
   return [];
+}
+
+export async function GetSharedUserProfileData({
+  shared_keys,
+}: {
+  shared_keys: any;
+}) {
+  const shared_user_profile_data: any = [];
+
+  /*
+   * this is the function, wehre I came to know how much javascript is fucked up
+   * basically impelemented for-in loop instead of the normal for loop.
+   * got unexpected behaviour, did some googleing, binge read and watch all the articles and videos
+   * on how javascirpt is so messed up, and still it is the browser standard :clown:
+   */
+  for (var i = 0; i < shared_keys.length; i++) {
+    const public_key = shared_keys[i];
+    if (public_key != "") {
+      try {
+        // get shared user id
+        const result =
+          await sql`SELECT * FROM users WHERE public_key=${public_key}`;
+        const row = result.rows[0];
+        const userId = row.id;
+
+        // get User object from clerk
+        const user = await clerkClient.users.getUser(userId);
+        shared_user_profile_data.push([
+          user.imageUrl,
+          user.firstName,
+          user.lastName,
+        ]);
+      } catch (error) {
+        console.log(`Error: while getting shared user profile data: ${error}`);
+      }
+    }
+  }
+
+  return shared_user_profile_data;
 }
