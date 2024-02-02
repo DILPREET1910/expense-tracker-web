@@ -5,7 +5,11 @@ import { auth } from "@clerk/nextjs";
 
 // lib imports
 import NotFound from "@/app/not-found";
-import { CheckValidSharedSlug, GetSharedUserId } from "@/app/lib/user";
+import {
+  CheckValidSharedSlug,
+  GetSharedUserId,
+  GetSingleSharedUserProfileData,
+} from "@/app/lib/user";
 import { GetDashboardEntries, GetEntries } from "@/app/lib/entries";
 import DashboardTable from "@/app/ui/dashboard/dashboardTable";
 import SharedDashboardForm from "@/app/ui/dashboard/shared/sharedDashboardForm";
@@ -50,9 +54,24 @@ export default async function SharedData({
   // get data entries
   const entries = await GetEntries({ user_id: sharedUserId! });
 
+  // get shared user profile data
+  const shared_user_profile_data = await GetSingleSharedUserProfileData({
+    public_key: params.public_key,
+  });
+
   return (
     <div>
-      <div className="border-4 border-gray-900 rounded-lg p-12">
+      <div className="p-5">
+        <img
+          className="w-8 h-8 rounded-full inline-block"
+          src={shared_user_profile_data[0] || ""}
+          alt="user profile"
+        />
+        <p className="inline-block pl-2 font-semibold">
+          {shared_user_profile_data[1]} {shared_user_profile_data[2]}
+        </p>
+      </div>
+      <div className="border-4 border-gray-900 rounded-lg p-10">
         <p className="text-lg font-semibold">Dashboard</p>
         <SharedDashboardForm />
         <DashboardTable categoricalData={categoricalData} />

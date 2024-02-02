@@ -157,9 +157,10 @@ export async function CheckValidSharedSlug({
   return false;
 }
 
-export async function GetSharedUserId({public_key}:{public_key:string}){
+export async function GetSharedUserId({ public_key }: { public_key: string }) {
   try {
-    const result = await sql`SELECT * FROM users WHERE public_key=${public_key}` ;
+    const result =
+      await sql`SELECT * FROM users WHERE public_key=${public_key}`;
     const row = result.rows[0];
     const userId = row.id;
     return userId;
@@ -168,4 +169,22 @@ export async function GetSharedUserId({public_key}:{public_key:string}){
   }
 
   return false;
+}
+
+export async function GetSingleSharedUserProfileData({
+  public_key,
+}: {
+  public_key: string;
+}) {
+  try {
+    const userId = await GetSharedUserId({ public_key: public_key });
+    const user = await clerkClient.users.getUser(userId!);
+    return [user.imageUrl, user.firstName, user.lastName];
+  } catch (error) {
+    console.log(
+      `Error: while getting single shared user profile data: ${error}`,
+    );
+  }
+
+  return [];
 }
