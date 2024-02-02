@@ -34,7 +34,7 @@ export default function Sidebar() {
               "bg-sky-200 hover:bg-sky-200": pathname == element.href,
             })}
           >
-            {element.name}
+            <p className="text-lg font-semibold">{element.name}</p>
           </Link>
         );
       })}
@@ -50,7 +50,7 @@ export default function Sidebar() {
         >
           <UserButton afterSignOutUrl="/" />
           <Link href="/dashboard/profile" className="pl-2">
-            Profile
+            <p className="text-lg font-semibold">Profile</p>
           </Link>
         </div>
       )}
