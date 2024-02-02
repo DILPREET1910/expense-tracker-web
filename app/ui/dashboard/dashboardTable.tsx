@@ -29,7 +29,7 @@ export default function DashboardTable({
                 <tr key={element.key}>
                   <td className="border border-gray-500 p-1">{element.key}</td>
                   <td className="border border-gray-500 p-1 text-right">
-                    {element.value}
+                    {element.value.toLocaleString()}
                   </td>
                   <td className="border border-gray-500 p-1 text-right">
                     {((element.value / total) * 100).toFixed(2)}%
@@ -40,7 +40,7 @@ export default function DashboardTable({
 
             <tr className="bg-gray-200">
               <td className="border border-gray-500 p-1">Total</td>
-              <td className="border border-gray-500 p-1 text-right">{total}</td>
+              <td className="border border-gray-500 p-1 text-right">{total.toLocaleString()}</td>
               <td className="border border-gray-500 p-1 text-right">100%</td>
             </tr>
           </tbody>

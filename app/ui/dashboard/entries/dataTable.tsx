@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
 // vercel imports
 import { QueryResultRow } from "@vercel/postgres";
 
-export default function DataTable({entries}:{entries:QueryResultRow[]}){
-  return(
+export default function DataTable({ entries }: { entries: QueryResultRow[] }) {
+  return (
     <div className="border-4 border-gray-900 rounded-lg">
       <table className="w-full">
         <thead className="text-left">
@@ -17,20 +17,22 @@ export default function DataTable({entries}:{entries:QueryResultRow[]}){
         </thead>
 
         <tbody>
-          {
-            entries.map(
-              (entry) => {
-                return(
-                  <tr key={entry.id}>
-                    <td className="border border-gray-500 pl-1">{entry.date}</td>
-                    <td className="border border-gray-500 pl-1">{entry.category_name}</td>
-                    <td className="border border-gray-500 pl-1">{entry.description}</td>
-                    <td className="border border-gray-500 pl-1">{entry.amount}</td>
-                  </tr>
-                );
-              }
-            )
-          }
+          {entries.map((entry) => {
+            return (
+              <tr key={entry.id}>
+                <td className="border border-gray-500 pl-1">{entry.date}</td>
+                <td className="border border-gray-500 pl-1">
+                  {entry.category_name}
+                </td>
+                <td className="border border-gray-500 pl-1">
+                  {entry.description}
+                </td>
+                <td className="border border-gray-500 pl-1 text-right pr-1">
+                  {parseInt(entry.amount).toLocaleString()}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
