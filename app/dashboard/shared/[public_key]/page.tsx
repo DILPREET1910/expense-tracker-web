@@ -61,7 +61,7 @@ export default async function SharedData({
 
   return (
     <div>
-      <div className="p-5">
+      <div className="pb-5">
         <img
           className="w-8 h-8 rounded-full inline-block"
           src={shared_user_profile_data[0] || ""}
