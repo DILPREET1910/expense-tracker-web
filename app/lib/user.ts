@@ -5,7 +5,7 @@ import { clerkClient } from "@clerk/nextjs";
 import { sql } from "@vercel/postgres";
 
 // uuid generator imports
-import { v4 as uuidv4 } from "uuid";
+const uuidv4 = require("uuid").v4();
 
 export async function CheckUserExists(id: string) {
   try {
