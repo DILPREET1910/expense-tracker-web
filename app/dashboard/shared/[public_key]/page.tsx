@@ -4,11 +4,12 @@
 import { auth } from "@clerk/nextjs";
 
 // lib imports
-import { CheckValidSharedSlug, GetSharedUserId } from "@/app/lib/user";
 import NotFound from "@/app/not-found";
+import { CheckValidSharedSlug, GetSharedUserId } from "@/app/lib/user";
+import { GetDashboardEntries, GetEntries } from "@/app/lib/entries";
 import DashboardTable from "@/app/ui/dashboard/dashboardTable";
-import { GetDashboardEntries } from "@/app/lib/entries";
 import SharedDashboardForm from "@/app/ui/dashboard/shared/sharedDashboardForm";
+import DataTable from "@/app/ui/dashboard/entries/dataTable";
 
 export default async function SharedData({
   params,
@@ -46,11 +47,17 @@ export default async function SharedData({
     categoricalData.set(key, getValue + +element.amount);
   });
 
+  // get data entries
+  const entries = await GetEntries({ user_id: sharedUserId! });
+
   return (
     <div>
       <div className="border-4 border-gray-900 rounded-lg p-12">
+        <p className="text-lg font-semibold">Dashboard</p>
         <SharedDashboardForm />
         <DashboardTable categoricalData={categoricalData} />
+        <p className="mt-12 text-lg font-semibold">Data Entries</p>
+        <DataTable entries={entries} />
       </div>
     </div>
   );
