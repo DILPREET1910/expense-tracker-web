@@ -156,3 +156,16 @@ export async function CheckValidSharedSlug({
 
   return false;
 }
+
+export async function GetSharedUserId({public_key}:{public_key:string}){
+  try {
+    const result = await sql`SELECT * FROM users WHERE public_key=${public_key}` ;
+    const row = result.rows[0];
+    const userId = row.id;
+    return userId;
+  } catch (error) {
+    console.log(`Error: while getting shared user id: ${error}`);
+  }
+
+  return false;
+}
