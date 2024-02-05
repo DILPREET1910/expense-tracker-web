@@ -10,8 +10,16 @@ import { usePathname } from "next/navigation";
 // clsx imports
 import clsx from "clsx";
 
+// react imports
+import { useState } from "react";
+
+// react icons
+import { IoMenuSharp } from "react-icons/io5";
+import { IoIosArrowUp } from "react-icons/io";
+
 export default function Sidebar() {
   const { user, isLoaded } = useUser();
+  const [menu, setMenu] = useState(false);
 
   const links = [
     { key: 1, name: "Dashboard", href: "/dashboard" },
@@ -30,8 +38,9 @@ export default function Sidebar() {
           <Link
             key={element.key}
             href={element.href}
-            className={clsx("p-2 rounded-lg hover:bg-sky-50", {
+            className={clsx("p-2 rounded-lg hover:bg-sky-50 hidden md:block", {
               "bg-sky-200 hover:bg-sky-200": pathname == element.href,
+              "sm:block": menu === true,
             })}
           >
             <p className="text-lg font-semibold">{element.name}</p>
@@ -49,9 +58,24 @@ export default function Sidebar() {
           )}
         >
           <UserButton afterSignOutUrl="/" />
-          <Link href="/dashboard/profile" className="pl-2">
+          <Link href="/dashboard/profile" className="pl-2 flex w-full">
             <p className="text-lg font-semibold">Profile</p>
           </Link>
+          {menu ? (
+            <IoIosArrowUp
+              className="text-2xl md:hidden"
+              onClick={() => {
+                setMenu(!menu);
+              }}
+            />
+          ) : (
+            <IoMenuSharp
+              className="text-2xl md:hidden"
+              onClick={() => {
+                setMenu(!menu);
+              }}
+            />
+          )}
         </div>
       )}
     </div>
