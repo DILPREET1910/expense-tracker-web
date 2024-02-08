@@ -4,6 +4,7 @@
 import { QueryResultRow } from "@vercel/postgres";
 
 export default function DataTable({ entries }: { entries: QueryResultRow[] }) {
+  console.log(entries);
   return (
     <div className="border-4 border-gray-900 rounded-lg">
       <table className="w-full">
@@ -20,7 +21,7 @@ export default function DataTable({ entries }: { entries: QueryResultRow[] }) {
           {entries.map((entry) => {
             return (
               <tr key={entry.id}>
-                <td className="border border-gray-500 pl-1">{entry.date}</td>
+                <td className="border border-gray-500 pl-1">{entry.date.toLocaleDateString()}</td>
                 <td className="border border-gray-500 pl-1">
                   {entry.category_name}
                 </td>
