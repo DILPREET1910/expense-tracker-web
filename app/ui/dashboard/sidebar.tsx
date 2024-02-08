@@ -40,7 +40,7 @@ export default function Sidebar() {
             href={element.href}
             className={clsx("p-2 rounded-lg hover:bg-sky-50 hidden md:block", {
               "bg-sky-200 hover:bg-sky-200": pathname == element.href,
-              "sm:block": menu === true,
+              "max-md:block": menu === true,
             })}
           >
             <p className="text-lg font-semibold">{element.name}</p>
