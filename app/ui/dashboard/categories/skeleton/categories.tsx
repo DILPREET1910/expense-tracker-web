@@ -3,7 +3,7 @@ import SkeletonAddCategoryForm from "./addCategoriesForm";
 
 export default function SkeletonCategories() {
   return (
-    <div className="border-4 border-gray-900 rounded-lg p-12">
+    <div className="border-4 border-gray-900 rounded-lg p-12 animate-pulse">
       <div className="p-2 mb-2 rounded-lg hover:bg-gray-100 flex flex-row">
         <div className="mr-auto h-4 bg-gray-200 rounded-full p-1.5 w-24"></div>
 

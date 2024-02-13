@@ -1,6 +1,6 @@
 export default function SkeletonAdderForm() {
   return (
-    <div className="border-black border-4 rounded-xl p-12">
+    <div className="border-black border-4 rounded-xl p-12 animate-pulse">
       <div>
         <div className="flex flex-row">
           <div className="h-4 bg-gray-200 rounded-full p-1.5 w-12"></div>

@@ -1,6 +1,6 @@
 export default function SkeletonDataTable() {
   return (
-    <div className="border-4 border-gray-900 rounded-lg">
+    <div className="border-4 border-gray-900 rounded-lg animate-pulse">
       <table className="w-full">
         <thead className="text-left">
           <tr className="bg-gray-200">
