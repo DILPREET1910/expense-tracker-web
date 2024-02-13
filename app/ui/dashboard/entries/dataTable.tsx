@@ -4,7 +4,6 @@
 import { QueryResultRow } from "@vercel/postgres";
 
 export default function DataTable({ entries }: { entries: QueryResultRow[] }) {
-  console.log(entries);
   return (
     <div className="border-4 border-gray-900 rounded-lg">
       <table className="w-full">
