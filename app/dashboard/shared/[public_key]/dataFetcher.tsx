@@ -41,8 +41,8 @@ export default async function SharedDataDataFetcher({
 
   let filteredData = await GetDashboardEntries({
     user_id: sharedUserId!,
-    fromDate: new Date(fromDate.toLocaleString("en-US")),
-    toDate: new Date(toDate.toLocaleString("en-US")),
+    fromDate: fromDate,
+    toDate: toDate,
   });
 
   // set categorical data

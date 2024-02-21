@@ -24,9 +24,7 @@ export default function SharedDashboardForm() {
   );
 
   useEffect(() => {
-    router.push(
-      `${pathname}?from=${fromDate.toLocaleDateString()}&to=${toDate.toLocaleDateString()}`,
-    );
+    router.push(`${pathname}?from=${fromDate}&to=${toDate}`);
   }, [fromDate, toDate, router, pathname]);
 
   return (

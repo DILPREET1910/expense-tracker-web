@@ -22,8 +22,8 @@ export default async function DashboardDataFetcher({
 
   let filteredData = await GetDashboardEntries({
     user_id: userId!,
-    fromDate: new Date(fromDate.toLocaleString("en-US")),
-    toDate: new Date(toDate.toLocaleString("en-US")),
+    fromDate: fromDate,
+    toDate: toDate,
   });
 
   // set categorical Data

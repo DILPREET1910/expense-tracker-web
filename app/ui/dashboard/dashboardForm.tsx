@@ -23,9 +23,7 @@ export default function DashboardForm() {
   );
 
   useEffect(() => {
-    router.push(
-      `/dashboard?from=${fromDate.toLocaleDateString()}&to=${toDate.toLocaleDateString()}`,
-    );
+    router.push(`/dashboard?from=${fromDate}&to=${toDate}`);
   }, [fromDate, toDate, router]);
 
   return (
