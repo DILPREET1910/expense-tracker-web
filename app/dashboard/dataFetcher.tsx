@@ -17,10 +17,13 @@ export default async function DashboardDataFetcher({
 }) {
   const { userId } = auth();
 
+  const fromDate = new Date(params.from);
+  const toDate = new Date(params.to);
+
   let filteredData = await GetDashboardEntries({
     user_id: userId!,
-    fromDate: new Date(params.from),
-    toDate: new Date(params.to),
+    fromDate: new Date(fromDate.toLocaleString("en-US")),
+    toDate: new Date(toDate.toLocaleString("en-US")),
   });
 
   // set categorical Data
