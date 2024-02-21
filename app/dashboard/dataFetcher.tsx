@@ -35,7 +35,6 @@ export default async function DashboardDataFetcher({
   return (
     <div className="border-4 border-gray-900 rounded-lg p-12">
       <DashboardForm />
-      <p>{filteredData.toString()}</p>
       <DashboardTable categoricalData={categoricalData} />
     </div>
   );
