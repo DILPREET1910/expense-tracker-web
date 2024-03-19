@@ -1,5 +1,9 @@
 # [Expense-Tracker-Web](https://expense-tracker-web-dilpreet1910s-projects.vercel.app)
 
+
+[Demo video](https://github.com/DILPREET1910/expense-tracker-web/assets/81746463/3ee9c788-5875-4b54-9aec-e46aa5cf0a1f)
+
+
 The Expense Tracker is a personal finance tool designed to help individuals monitor their spending habits and manage their expenses effectively. This intuitive application enables users to create custom categories and add expenses accordingly. By offering a comprehensive view of all data entries and a dynamic dashboard displaying total costs within specified date ranges and across categories, this tool assists in gaining insights into spending patterns.
 
 I initially developed this website to gain a better understanding of my spending habits, aiming to track where and how I spend my money. By keeping a record of expenses and visualizing spending patterns, this tracker aims to facilitate smarter financial decisions and improve overall spending habits.
