@@ -1,5 +1,5 @@
 // clerk imports
-import { SignInButton, auth } from "@clerk/nextjs";
+import { SignInButton, SignUpButton, auth } from "@clerk/nextjs";
 
 //next js imports
 import { redirect } from "next/navigation";
@@ -15,6 +15,7 @@ export default function Home() {
     <div>
       <h1>Home</h1>
       <SignInButton />
+      <SignUpButton />
     </div>
   );
 }
