@@ -9,6 +9,8 @@ import { auth } from "@clerk/nextjs";
 import { GetDashboardEntries } from "../lib/entries";
 import DashboardForm from "../ui/dashboard/dashboardForm";
 import DashboardTable from "../ui/dashboard/dashboardTable";
+import { CheckFirstTime, CheckUserExists, InsertUser, ToggleFirstTime } from "../lib/user";
+import { InsertDefaultCategories } from "../lib/categories";
 
 export default async function DashboardDataFetcher({
   params,
@@ -16,6 +18,23 @@ export default async function DashboardDataFetcher({
   params: any;
 }) {
   const { userId } = auth();
+
+  // check if user exists
+  const userExists = await CheckUserExists(userId!);
+
+  // if user does not exists insert user
+  if (!userExists) {
+    await InsertUser(userId!);
+  }
+
+  // check user fist time
+  const firstTime = await CheckFirstTime(userId!);
+
+  // insert default categories for first time users
+  if (firstTime) {
+    await ToggleFirstTime(userId!);
+    await InsertDefaultCategories(userId!);
+  }
 
   const fromDate = new Date(params.from);
   const toDate = new Date(params.to);

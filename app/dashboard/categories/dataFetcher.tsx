@@ -23,23 +23,6 @@ import { revalidatePath } from "next/cache";
 export default async function CategoriesDataFetcher() {
   const { userId } = auth();
 
-  // check if user exists
-  const userExists = await CheckUserExists(userId!);
-
-  // if user does not exists insert user
-  if (!userExists) {
-    await InsertUser(userId!);
-  }
-
-  // check user fist time
-  const firstTime = await CheckFirstTime(userId!);
-
-  // insert default categories for first time users
-  if (firstTime) {
-    await ToggleFirstTime(userId!);
-    await InsertDefaultCategories(userId!);
-  }
-
   const categories = await GetCategories(userId!);
 
   async function handleCreateCategory(formData: FormData) {
